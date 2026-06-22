@@ -18,7 +18,7 @@ export default function Create() {
 
     return (
         <>
-            <Head title="Create Collector" />
+            <Head title="Crear Cobrador" />
 
 
             <div className="p-6 max-w-xl">
@@ -27,7 +27,7 @@ export default function Create() {
                 <div className="flex justify-between items-center mb-6">
 
                     <h1 className="text-2xl font-bold">
-                        Create Collector
+                        Crear Cobrador
                     </h1>
 
 
@@ -35,7 +35,7 @@ export default function Create() {
                         href="/collectors"
                         className="text-blue-600"
                     >
-                        Back
+                        Atrás
                     </Link>
 
                 </div>
@@ -48,7 +48,7 @@ export default function Create() {
                     <div>
 
                         <label className="block">
-                            Name
+                            Nombre
                         </label>
 
 
@@ -75,7 +75,7 @@ export default function Create() {
                     <div>
 
                         <label className="block">
-                            Phone
+                            Teléfono
                         </label>
 
 
@@ -104,7 +104,7 @@ export default function Create() {
                         disabled={processing}
                         className="bg-black text-white px-4 py-2 rounded"
                     >
-                        Save
+                        Guardar
                     </button>
 
 

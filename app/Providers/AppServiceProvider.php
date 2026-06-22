@@ -9,6 +9,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use App\Repositories\CollectorRepository;
 use App\Repositories\Interfaces\CollectorRepositoryInterface;
+use App\Repositories\MemberRepository;
+use App\Repositories\Interfaces\MemberRepositoryInterface;
+use App\Repositories\LoanRepository;
+use App\Repositories\Interfaces\LoanRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +24,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CollectorRepositoryInterface::class,
             CollectorRepository::class
+        );
+
+        $this->app->bind(
+            MemberRepositoryInterface::class,
+            MemberRepository::class
+        );
+
+        $this->app->bind(
+            LoanRepositoryInterface::class,
+            LoanRepository::class
         );
     }
 

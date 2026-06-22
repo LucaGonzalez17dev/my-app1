@@ -31,4 +31,9 @@ class Member extends Model
     {
         return $this->belongsTo(Collector::class);
     }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

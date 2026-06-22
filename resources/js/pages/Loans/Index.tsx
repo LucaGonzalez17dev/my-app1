@@ -1,44 +1,48 @@
 import { Head, Link, router } from '@inertiajs/react';
-import { Collector } from '@/types/models/Collector';
+import { Loan } from '@/types/models/Loan';
+
 
 interface Props {
-    collectors: Collector[];
+    loans: Loan[];
 }
 
-export default function Index({ collectors }: Props) {
+
+export default function Index({ loans }: Props) {
 
 
-    function deleteCollector(id: number) {
+    function deleteLoan(id: number) {
 
-        if (confirm('¿Está seguro que desea eliminar este cobrador?')) {
-
-            router.delete(`/collectors/${id}`);
-
+        if (confirm('¿Está seguro que desea eliminar este préstamo?')) {
+            router.delete(`/loans/${id}`);
         }
 
     }
 
 
+
     return (
         <>
-            <Head title="Cobradores" />
+            <Head title="Préstamos" />
+
 
             <div className="p-6">
 
 
                 <div className="flex justify-between items-center mb-6">
 
+
                     <h1 className="text-2xl font-bold">
-                        Cobradores
+                        Préstamos
                     </h1>
 
 
                     <Link
-                        href="/collectors/create"
+                        href="/loans/create"
                         className="px-4 py-2 bg-black text-white rounded"
                     >
-                        Nuevo cobrador
+                        Nuevo Préstamo
                     </Link>
+
 
                 </div>
 
@@ -52,12 +56,27 @@ export default function Index({ collectors }: Props) {
                         <tr className="border-b">
 
                             <th className="text-left p-2">
-                                Nombre
+                                Socio
                             </th>
 
 
                             <th className="text-left p-2">
-                                Teléfono
+                                Elemento
+                            </th>
+
+
+                            <th className="text-left p-2">
+                                Cantidad
+                            </th>
+
+
+                            <th className="text-left p-2">
+                                Dirección
+                            </th>
+
+
+                            <th className="text-left p-2">
+                                Fecha
                             </th>
 
 
@@ -74,22 +93,40 @@ export default function Index({ collectors }: Props) {
                     <tbody>
 
 
-                    {collectors.map((collector) => (
+                    {loans.map((loan) => (
 
                         <tr
-                            key={collector.id}
+                            key={loan.id}
                             className="border-b"
                         >
 
 
                             <td className="p-2">
-                                {collector.name}
+                                {loan.member?.full_name ?? '-'}
                             </td>
 
 
+                            <td className="p-2">
+                                {loan.item_name}
+                            </td>
+
 
                             <td className="p-2">
-                                {collector.phone ?? '-'}
+                                {loan.quantity}
+                            </td>
+
+
+                            <td className="p-2">
+                                {loan.collection_address}
+                            </td>
+
+
+                            <td className="p-2">
+
+                                {new Date(
+                                    loan.loan_date
+                                ).toLocaleDateString('es-UY')}
+
                             </td>
 
 
@@ -98,7 +135,7 @@ export default function Index({ collectors }: Props) {
 
 
                                 <Link
-                                    href={`/collectors/${collector.id}/edit`}
+                                    href={`/loans/${loan.id}/edit`}
                                     className="text-blue-600"
                                 >
                                     Editar
@@ -107,7 +144,7 @@ export default function Index({ collectors }: Props) {
 
 
                                 <button
-                                    onClick={() => deleteCollector(collector.id)}
+                                    onClick={() => deleteLoan(loan.id)}
                                     className="text-red-600"
                                 >
                                     Eliminar
@@ -129,6 +166,7 @@ export default function Index({ collectors }: Props) {
 
 
             </div>
+
         </>
     );
 }
