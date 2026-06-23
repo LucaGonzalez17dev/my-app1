@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Member;
 use App\Repositories\Interfaces\MemberRepositoryInterface; 
-use Exception;
 
 class MemberService
 {
@@ -41,5 +40,10 @@ class MemberService
     public function delete(Member $member)
     {
         return $this->memberRepository->delete($member);
+    }
+
+    public function searchByName(string $name)
+    {
+        return $this->memberRepository->searchByName($name);
     }
 }

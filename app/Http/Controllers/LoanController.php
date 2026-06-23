@@ -80,17 +80,15 @@ class LoanController extends Controller
 
 
     public function edit(Loan $loan)
-    {
+{
+    $loan->load('member');
 
-        return Inertia::render('Loans/Edit', [
+    return Inertia::render('Loans/Edit', [
 
-            'loan' => $loan,
+        'loan' => $loan
 
-            'members' => Member::all()
-
-        ]);
-
-    }
+    ]);
+}
 
 
 
@@ -158,5 +156,37 @@ class LoanController extends Controller
 
     }
 
+    public function searchByMember(Request $request)
+    {
+        $memberId = $request->input('member_id');
+
+        $loans = $this->loanService->findByMember($memberId);
+
+        return Inertia::render('Loans/Index', [
+            'loans' => $loans
+        ]);
+    }
+ 
+    //buscar members para form create y edit
+    public function searchMembers(Request $request)
+    {
+    $searchTerm = $request->input('query');
+
+    $members = Member::query()
+
+        ->where('full_name', 'like', "%{$searchTerm}%")
+
+        ->orWhere('national_id', 'like', "%{$searchTerm}%")
+
+        ->limit(10)
+
+        ->get([
+            'id',
+            'full_name',
+            'national_id'
+        ]);
+
+    return response()->json($members);
+    }
 
 }

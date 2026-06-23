@@ -18,6 +18,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     CollectorController::class
 );
 
+Route::get(
+    '/members/search',
+    [MemberController::class, 'searchMembers']
+);
+
+Route::get(
+    '/loans/search',
+    [LoanController::class, 'searchByMember']
+);
+
 Route::resource(
     'members',
     MemberController::class
@@ -27,6 +37,8 @@ Route::resource(
     'loans',
     LoanController::class
 );
+
+
 });
 
 
