@@ -17,4 +17,6 @@ interface MemberRepositoryInterface
     public function delete(Member $member): bool;
 
     public function searchByName(string $name);
+
+    public function findByCollector(int $collectorId);
 }

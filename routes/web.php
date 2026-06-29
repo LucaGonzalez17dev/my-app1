@@ -23,6 +23,14 @@ Route::get(
     [MemberController::class, 'searchMembers']
 );
 
+Route::get('/members/search', [MemberController::class, 'searchByName'])
+    ->name('members.search');
+
+Route::get('/members/collector', [MemberController::class, 'findByCollector'])
+    ->name('members.collector');
+
+Route::resource('members', MemberController::class);
+
 Route::get(
     '/loans/search',
     [LoanController::class, 'searchByMember']

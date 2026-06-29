@@ -46,4 +46,9 @@ class MemberService
     {
         return $this->memberRepository->searchByName($name);
     }
+
+    public function findByCollector(int $collectorId)
+    {
+        return $this->memberRepository->findByCollector($collectorId);
+    }
 }

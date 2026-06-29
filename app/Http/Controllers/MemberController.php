@@ -20,7 +20,8 @@ class MemberController extends Controller
         $members = $this->memberService->getAll();
 
         return Inertia::render('Members/Index', [
-            'members' => $members
+            'members' => $members,
+            'collectors' => Collector::all(),
         ]);
     }
 
@@ -87,29 +88,28 @@ class MemberController extends Controller
             ->with('success', 'Member deleted successfully.');
     }
 
-    public function searchMembers(Request $request)
+    public function searchByName(Request $request)
     {
-    $searchTerm = $request->input('query');
+        $name = $request->input('name');
+        $members = $this->memberService->searchByName($name);
 
-
-    $members = Member::where(
-            'full_name',
-            'like',
-            "%{$searchTerm}%"
-        )
-        ->orWhere(
-            'national_id',
-            'like',
-            "%{$searchTerm}%"
-        )
-        ->limit(10)
-        ->get([
-            'id',
-            'full_name',
-            'national_id'
+        return Inertia::render('Members/Index', [
+            'members' => $members,
+            'collectors' => Collector::all(),
         ]);
-
-
-    return response()->json($members);
     }
+
+    public function findByCollector(Request $request)
+    {
+        $collectorId = $request->input('collector_id');
+
+         $members = $this->memberService->findByCollector($collectorId);
+
+        return Inertia::render('Members/Index', [
+            'members' => $members,
+            'collectors' => Collector::all(),
+        ]);
+    }
+
+
 }
