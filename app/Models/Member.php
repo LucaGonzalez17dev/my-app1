@@ -36,4 +36,9 @@ class Member extends Model
     {
         return $this->hasMany(Loan::class);
     }
+
+    public function overdueInstallments()
+    {
+        return $this->hasMany(OverdueInstallment::class);
+    }
 }

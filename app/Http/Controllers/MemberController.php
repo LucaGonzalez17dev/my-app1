@@ -112,4 +112,26 @@ class MemberController extends Controller
     }
 
 
+    public function searchMembers(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+
+        $members = Member::query()
+
+            ->where('full_name', 'like', "%{$searchTerm}%")
+
+            ->orWhere('national_id', 'like', "%{$searchTerm}%")
+
+            ->limit(10)
+
+            ->get([
+                'id',
+                'full_name',
+                'national_id'
+        ]);
+
+
+    return response()->json($members);
+    }
 }

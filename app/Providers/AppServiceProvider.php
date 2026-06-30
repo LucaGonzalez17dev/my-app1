@@ -13,6 +13,8 @@ use App\Repositories\MemberRepository;
 use App\Repositories\Interfaces\MemberRepositoryInterface;
 use App\Repositories\LoanRepository;
 use App\Repositories\Interfaces\LoanRepositoryInterface;
+use App\Repositories\OverdueInstallmentRepository;
+use App\Repositories\Interfaces\OverdueInstallmentRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             LoanRepositoryInterface::class,
             LoanRepository::class
+        );
+
+        $this->app->bind(
+            OverdueInstallmentRepositoryInterface::class,
+            OverdueInstallmentRepository::class
         );
     }
 

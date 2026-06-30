@@ -11,24 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loans', function (Blueprint $table) {
+        Schema::create('overdue_installments', function (Blueprint $table) {
 
             $table->id();
 
-            $table->foreignId('member_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('member_id')->constrained()->onDelete('cascade');
 
-            $table->string('collection_address');
-
-            $table->string('item_name');
-
-            $table->integer('quantity');
-
-            $table->date('loan_date');
-
-            $table->softDeletes();
+            $table->date('period');
 
             $table->timestamps();
 
+            $table->unique(['member_id', 'period']);
         });
     }
 
@@ -37,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loans');
+        Schema::dropIfExists('overdue_installments');
     }
 };
